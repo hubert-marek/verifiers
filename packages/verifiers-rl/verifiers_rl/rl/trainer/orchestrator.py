@@ -225,7 +225,7 @@ class Orchestrator:
             model=self.model_name,
             sampling_args=self.sampling_args,
             max_concurrent=self.max_concurrent,
-            state_columns=["trajectory"],  # Include trajectory for RL training
+            state_columns=list(set(["trajectory"] + self.env.state_columns)),
         )
         self.is_generating = False
         wall_clock_s = time.time() - start_time

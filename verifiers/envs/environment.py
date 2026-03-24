@@ -913,6 +913,7 @@ class Environment(ABC):
         total_rollouts = len(raw_inputs)
         num_examples = len(set([i["example_id"] for i in raw_inputs]))
         rollouts_per_example = total_rollouts // num_examples if num_examples > 0 else 0
+        state_columns = list(set(self.state_columns + (state_columns or [])))
         builder = GenerateOutputsBuilder(
             env_id=self.env_id,
             env_args=self.env_args,
